@@ -1,0 +1,103 @@
+---
+/**
+ * Ruta dinámica: /portfolio/[slug].
+ *
+ * Sustituye a los 17 archivos `portfolio-single*.html` del sitio original.
+ * `getStaticPaths` genera una página estática por cada proyecto con página
+ * propia (excluye los que tenían `singlePage: '#'`). El markup del carrusel
+ * es idéntico al del template legacy, así los plugins de swiper +
+ * lightgallery + zoom seguirán inicializándose correctamente.
+ */
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ScrollDownNotifier from '@components/ScrollDownNotifier.astro';
+import ProjectSlide from '@components/portfolio/ProjectSlide.astro';
+import { projectsWithPage, type Project } from '@data/projects';
+
+export const getStaticPaths = (() => {
+  return projectsWithPage.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+
+const nextHref = project.nextSlug ? `/portfolio/${project.nextSlug}` : '/portfolio';
+const nextLabel = project.nextLabel ?? 'Project Title';
+---
+
+<BaseLayout
+  title={`${project.title} — Ignacio Galante Milicua`}
+  pageSubtitle={project.title}
+  fullHeight
+  contentClass="no-mob-hidden"
+>
+  <div class="fixed-bottom-panel fs-fix-bom-panel fbp_single-car">
+    <div class="hs_init-container">
+      <div class="hs_init-wrap fl-wrap">
+        <div class="hs_init"></div>
+        <div class="fwcb fw-carousel-button-prev">
+          <span><i class="fal fa-angle-left"></i></span>
+        </div>
+        <div class="fwcb fw-carousel-button-next">
+          <span><i class="fal fa-angle-right"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="fw-carousel-counter"></div>
+    <div class="tumbnail-button show_thumbnails unvisthum">
+      <div class="list">
+        <div class="list-btn">
+          <span>
+            <i class="b1 c1"></i><i class="b1 c2"></i><i class="b1 c3"></i>
+            <i class="b2 c1"></i><i class="b2 c2"></i><i class="b2 c3"></i>
+            <i class="b3 c1"></i><i class="b3 c2"></i><i class="b3 c3"></i>
+          </span>
+        </div>
+      </div>
+      <span class="thumbnail-tooltip">Thumbnails</span>
+    </div>
+  </div>
+
+  <div class="show-details shibtn unvisthum2 sd_btn">
+    Project Details <i class="fal fa-long-arrow-right"></i>
+  </div>
+
+  <!-- fw-carousel-wrap -->
+  <div class="fw-carousel-wrap fsc-holder single_project_carousel">
+    <div
+      class="fw-carousel fs-gallery-wrap fl-wrap full-height lightgallery thumb-contr"
+      data-mousecontrol="true"
+    >
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          {project.slides.map((slide) => <ProjectSlide slide={slide} />)}
+          <div class="swiper-slide">
+            <a class="next-project-swiper-link ajax" href={nextHref}>
+              <span>Next {nextLabel}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fw-carousel end -->
+
+  <!-- thumbnail-container (rellenado por JS legacy) -->
+  <div class="thumbnail-container">
+    <div class="thumbnail-wrap"></div>
+  </div>
+
+  <ScrollDownNotifier />
+
+  <div class="body-color-bg"></div>
+
+  <script>
+    import { initPortfolioSingle } from '@scripts/portfolio-single';
+    initPortfolioSingle();
+  </script>
+</BaseLayout>

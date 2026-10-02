@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Excluir el mapa del site (opcional) y páginas legacy que están redireccionadas
+Disallow: /portfolio-single.html
+Disallow: /portfolio-single01.html
+Disallow: /portfolio-single02.html
+Disallow: /portfolio-single03.html
+Disallow: /portfolio-single04.html
+Disallow: /portfolio-single05.html
+Disallow: /portfolio-single06.html
+Disallow: /portfolio-single07.html
+Disallow: /portfolio-single08.html
+Disallow: /portfolio-single09.html
+Disallow: /portfolio-single10.html
+Disallow: /portfolio-single11.html
+Disallow: /portfolio-single12.html
+Disallow: /portfolio-single13.html
+Disallow: /portfolio-single14.html
+Disallow: /portfolio-single15.html
+Disallow: /portfolio-single16.html
+Disallow: /portfolio.html
+Disallow: /about.html
+Disallow: /contacts.html
+
+Sitemap: https://galantemilicua.com/sitemap-index.xml

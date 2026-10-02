@@ -1,0 +1,405 @@
+---
+/**
+ * About page (migrada 1:1 desde about.html).
+ *
+ * La chrome (loader/header/nav/scripts) vive en BaseLayout. Aquí solo va el
+ * contenido del `<div class="content">`, dividido con el componente `Section`
+ * para mantener el patrón de scroll interno del template.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Section from '@components/Section.astro';
+import ProgressCircle from '@components/ProgressCircle.astro';
+---
+
+<BaseLayout title="About — Ignacio Galante Milicua" pageSubtitle="Sobre mí" contentClass="about-page">
+  <div class="page-scroll-nav">
+    <nav class="scroll-init page-scroll-nav_wrap">
+      <ul class="no-list-style init_hidden_filter">
+        <li>
+          <a class="scroll-link fbgs act-sec" href="#sec1" data-bgtext="01"><span>About</span></a>
+        </li>
+        <li>
+          <a class="scroll-link fbgs" href="#sec2" data-bgtext="02"><span>Services</span></a>
+        </li>
+        <li>
+          <a class="scroll-link fbgs" href="#sec4" data-bgtext="04"><span>Skills</span></a>
+        </li>
+        <li>
+          <a class="scroll-link fbgs" href="#sec5" data-bgtext="05"><span>Clients</span></a>
+        </li>
+      </ul>
+      <div class="psn_button act-filter"><i class="fal fa-sort"></i> FIlter</div>
+    </nav>
+  </div>
+
+  <!-- hero-section-dec -->
+  <div class="hero-section-dec color-bg">
+    <ProgressCircle />
+  </div>
+  <!-- hero-section-dec end -->
+
+  <!-- fixed-column-wrap -->
+  <div class="fixed-column-wrap">
+    <div class="pr-bg"></div>
+    <div class="fixed-column-wrap-content">
+      <div class="slideshow-container">
+        <div class="slideshow-container_wrap fl-wrap full-height">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="ms-item_fs fl-wrap">
+                  <div class="bg par-elem" data-bg="/images/bg/about-main.jpg"></div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="ms-item_fs fl-wrap">
+                  <div class="bg par-elem" data-bg="/images/bg/about-main02.png"></div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="ms-item_fs fl-wrap">
+                  <div class="bg par-elem" data-bg="/images/bg/about-main03.jpg"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay"></div>
+      <div class="progress-bar-wrap bot-element">
+        <div class="progress-bar"></div>
+      </div>
+      <div class="fixed-column-wrap_title first-tile_load">
+        <h2>Full-Stack<br />Developer</h2>
+        <p></p>
+      </div>
+      <div class="fixed-column-dec"></div>
+      <div class="scroll-notifer">Scroll Down</div>
+      <div class="section-counter">
+        <div class="sc_current"><span>01</span></div>
+        <div class="sc_total"></div>
+      </div>
+      <div class="fcwc-pagination fcwc-wrap"></div>
+    </div>
+  </div>
+  <!-- fixed-column-wrap end -->
+
+  <!-- column-wrap -->
+  <div class="column-wrap">
+    <div class="column-wrap-container fl-wrap">
+      <div class="col-wc_dec"></div>
+
+      <!-- SECCIÓN 01 — About -->
+      <Section id="sec1" number="01">
+        <div class="section-title">
+          <h3>Some Words About Me</h3>
+          <p>
+            Frontend / Full-Stack web developer based in Gran Canaria, remote-ready. I come from a
+            product and UX/UI background — freelance, agency and in-house — and moved into
+            front-end and full-stack engineering after a dedicated bootcamp: React, Astro,
+            TypeScript, and shipping a project end to end, from architecture and database to
+            interface and deployment.
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="dec-img fl-wrap">
+              <img src="/images/about-top.jpg" class="respimg" alt="About" />
+            </div>
+          </div>
+          <div class="col-sm-7">
+            <div class="main-about fl-wrap">
+              <h2>
+                From product design to <br /><span> full-stack </span> delivery
+              </h2>
+              <p>
+                I build and ship web products for businesses and teams that need more than a pretty
+                page: booking systems, custom WordPress tools, recipe platforms, admin panels and
+                sites that have to perform. Recent work includes Astro and PostgreSQL/Supabase
+                stacks, React apps with Docker and AWS, and WordPress builds with SEO, analytics
+                and custom plugins.
+              </p>
+              <p>
+                Fluent in English (C1, five years living and studying in the UK) and used to
+                working remotely with distributed teams and clients. I also integrate AI tools into
+                design and development workflows — from the OpenAI API to agent-based assistants —
+                when they actually help the product, not as decoration.
+              </p>
+              <div class="facts-container fl-wrap"></div>
+              <a href="/portfolio" class="btn ajax color-bg fl-btn"><span>My Portfolio</span></a>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <!-- SECCIÓN 02 — Services -->
+      <Section id="sec2" number="02">
+        <div class="section-title">
+          <h3>Services Provided</h3>
+          <p>
+            End-to-end web work: front-end engineering, full-stack products, UX/UI, WordPress and
+            visual identity. From a first wireframe to a deployed app with a real database and
+            admin tools.
+          </p>
+        </div>
+        <div class="process-wrap fl-wrap">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="process-details">
+                <span class="pd-icon"><i class="fal fa-code"></i></span>
+                <h4>Full-Stack Development</h4>
+                <div class="clearfix"></div>
+                <p>
+                  React, Astro and TypeScript on the front, Node or Python on the back, PostgreSQL
+                  or Supabase for data — shipped with Git, Docker and AWS when the project needs
+                  it.
+                </p>
+                <span class="process-numder">01.</span>
+                <div class="show-phdc">
+                  <i class="fal fa-plus"></i> <span>Details</span>
+                </div>
+                <div class="proces-details-content">
+                  <div class="close-hidden_pdc"><i class="fal fa-times"></i></div>
+                  <div class="proces-details-content-wrap">
+                    <ul class="pdcw_list fl-wrap">
+                      <li>React / Astro</li>
+                      <li>APIs</li>
+                      <li>Deploy</li>
+                    </ul>
+                    <p>
+                      Recent builds include a recipe platform with user accounts and subscriptions,
+                      an appointment system for a multi-location workshop group, and a ticketing
+                      product with sales tracking and QR validation. I take projects from concept
+                      through coding to production.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="process-details">
+                <span class="pd-icon"><i class="fal fa-pencil-ruler"></i></span>
+                <h4>UI / UX Design</h4>
+                <div class="clearfix"></div>
+                <p>
+                  Product and interface design in Figma: wireframes, prototypes and UI that
+                  developers can actually build — informed by years as both designer and coder.
+                </p>
+                <span class="process-numder">02.</span>
+                <div class="show-phdc">
+                  <i class="fal fa-plus"></i> <span>Details</span>
+                </div>
+                <div class="proces-details-content">
+                  <div class="close-hidden_pdc"><i class="fal fa-times"></i></div>
+                  <div class="proces-details-content-wrap">
+                    <ul class="pdcw_list fl-wrap">
+                      <li>Figma</li>
+                      <li>Wireframes</li>
+                      <li>Prototypes</li>
+                    </ul>
+                    <p>
+                      I work with agencies and in-house teams on flows, mockups and custom web
+                      applications. The goal is the same every time: clear structure, usable
+                      screens, and a handoff that does not fall apart in development.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="process-details">
+                <span class="pd-icon"><i class="fab fa-wordpress"></i></span>
+                <h4>WordPress &amp; CMS</h4>
+                <div class="clearfix"></div>
+                <p>
+                  Custom themes, plugins and Joomla builds, plus SEO and Google Analytics 4.
+                  Including tools like a Project Manager plugin so clients can follow progress live.
+                </p>
+                <span class="process-numder">03.</span>
+                <div class="show-phdc">
+                  <i class="fal fa-plus"></i> <span>Details</span>
+                </div>
+                <div class="proces-details-content">
+                  <div class="close-hidden_pdc"><i class="fal fa-times"></i></div>
+                  <div class="proces-details-content-wrap">
+                    <ul class="pdcw_list fl-wrap">
+                      <li>Themes</li>
+                      <li>Plugins</li>
+                      <li>SEO / GA4</li>
+                    </ul>
+                    <p>
+                      Over 50 web projects for small businesses, agencies and e-commerce clients —
+                      from first online presence to shops that need to sell. I still take WordPress
+                      work when it is the right tool, not by default.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="process-details">
+                <span class="pd-icon"><i class="fal fa-paint-brush"></i></span>
+                <h4>Branding &amp; Visual</h4>
+                <div class="clearfix"></div>
+                <p>
+                  Logos, campaigns and marketing assets in Photoshop and Illustrator, with AI tools
+                  in the mix when they speed up exploration without flattening the brand.
+                </p>
+                <span class="process-numder">04.</span>
+                <div class="show-phdc">
+                  <i class="fal fa-plus"></i> <span>Details</span>
+                </div>
+                <div class="proces-details-content">
+                  <div class="close-hidden_pdc"><i class="fal fa-times"></i></div>
+                  <div class="proces-details-content-wrap">
+                    <ul class="pdcw_list fl-wrap">
+                      <li>Identity</li>
+                      <li>Campaigns</li>
+                      <li>Assets</li>
+                    </ul>
+                    <p>
+                      Visual work sits next to the product, not apart from it: consistent identity
+                      across the site, the campaign and the admin tools. That includes brand
+                      systems I have owned in-house as well as freelance assets for agencies.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="srv-link-text fl-wrap">
+          <h4>Ready to order your project ? Visit my contacts page :</h4>
+          <a href="/contacts" class="btn ajax color-bg fl-btn"><span>Contacts</span></a>
+        </div>
+      </Section>
+
+      <!-- SECCIÓN 04 — Skills -->
+      <Section id="sec4">
+        <div class="section-title">
+          <h3>Developer and Language Skills</h3>
+          <p>
+            Current stack: TypeScript, React, Astro, Python, SQL and Git, with Figma and Adobe for
+            product and visual work, plus WordPress when a CMS is the right fit.
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-9">
+            <div class="skillbar-box animaper">
+              <div class="pr-bg pr-bg-white"></div>
+              {
+                [
+                  ['JavaScript / TypeScript', '90%'],
+                  ['HTML5 / CSS3', '90%'],
+                  ['React & Astro', '85%'],
+                  ['Figma', '85%'],
+                  ['Photoshop & Illustrator', '85%'],
+                  ['WordPress', '85%'],
+                  ['Git', '80%'],
+                  ['Python', '75%'],
+                  ['SQL / PostgreSQL', '75%'],
+                ].map(([name, pct]) => (
+                  <>
+                    <div class="custom-skillbar-title"><span>{name}</span></div>
+                    <div class="skill-bar-percent">{pct}</div>
+                    <div class="skillbar-bg" data-percent={pct}>
+                      <div class="custom-skillbar"></div>
+                    </div>
+                  </>
+                ))
+              }
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="piechart-holder animaper" data-skcolor="#F2842F">
+              {
+                [
+                  ['Spanish', '100'],
+                  ['English', '90'],
+                  ['Communication', '90'],
+                  ['Team Player', '90'],
+                  ['Remote work', '90'],
+                ].map(([name, pct]) => (
+                  <div class="piechart">
+                    <span class="chart" data-percent={pct}>
+                      <span class="percent"></span>
+                    </span>
+                    <div class="clearfix"></div>
+                    <h4>{name}</h4>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <!-- SECCIÓN 05 — Clients & Testimonials -->
+      <Section id="sec5" number="04" separatorAfter={false}>
+        <div class="section-title">
+          <h3>Clients And Testimonials</h3>
+          <p>
+            Discover what our clients have to say about their experience working with me. Hear
+            firsthand accounts of how my solutions have transformed their businesses and exceeded
+            their expectations.
+          </p>
+        </div>
+        <div class="testimonilas-carousel-wrap fl-wrap">
+          <div class="tc-button tc-button-next"><i class="fal fa-angle-right"></i></div>
+          <div class="tc-button tc-button-prev"><i class="fal fa-angle-left"></i></div>
+          <div class="testimonilas-carousel">
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
+                {
+                  [
+                    {
+                      name: 'Andy Dimasky',
+                      text: '"Working with Galante Milicua was a game-changer for our business. Their expertise and dedication turned our vision into reality, delivering results that surpassed our expectations. I highly recommend their services to anyone seeking innovation and excellence."',
+                      num: '01.',
+                    },
+                    {
+                      name: 'Frank Dellov',
+                      text: '"Choosing Galante Milicua was the best decision for our project. His professionalism and attention to detail were evident throughout the process. We\'re thrilled with the outcome and look forward to collaborating with him again in the future."',
+                      num: '02.',
+                    },
+                    {
+                      name: 'Centa Simpson',
+                      text: '"Working with Galante Milicua was a breath of fresh air. Their dedication, expertise, and seamless communication made our collaboration effortless. We\'re thrilled with the outcome and grateful for their exceptional service. Highly recommended"',
+                      num: '03.',
+                    },
+                    {
+                      name: 'Nicolo Svensky',
+                      text: '"Our experience with Galante Milicua was exceptional from start to finish. His creativity and technical proficiency were instrumental in bringing our project to life. We couldn\'t be happier with the results and highly recommend their services to others."',
+                      num: '04.',
+                    },
+                  ].map((t) => (
+                    <div class="swiper-slide">
+                      <div class="testi-item fl-wrap">
+                        <div class="testi-avatar">
+                          <img src="/images/avatar/1.jpg" alt={t.name} />
+                        </div>
+                        <div class="testimonilas-text fl-wrap">
+                          <h3>{t.name}</h3>
+                          <p>{t.text}</p>
+                          <span class="testi-number">{t.num}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+          <div class="tc-pagination"></div>
+        </div>
+      </Section>
+    </div>
+  </div>
+
+  <div class="to-top-btn to-top"><i class="fal fa-long-arrow-up"></i></div>
+
+  <script>
+    import { initAbout } from '@scripts/about';
+    initAbout();
+  </script>
+</BaseLayout>

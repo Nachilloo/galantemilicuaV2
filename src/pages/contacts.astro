@@ -1,0 +1,112 @@
+---
+/**
+ * Contacts page (migrada desde contacts.html).
+ *
+ * NOTA: el `<form>` sigue apuntando a `/contact.php` (servido tal cual desde
+ * `public/contact.php` del sitio original). Astro es estático: si en la Fase 3
+ * quieres un endpoint Astro nativo, migraremos esto a `src/pages/api/contact.ts`
+ * o a Formspree/Web3Forms.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { site } from '@data/site';
+---
+
+<BaseLayout
+  title="Contacts — Ignacio Galante Milicua"
+  pageSubtitle="Contacto"
+  fullHeight
+  contentClass="no-mob-hidden2"
+>
+  <div class="content-inner">
+    <div class="content-front">
+      <div class="cf-inner">
+        <div class="contact-details-title fl-wrap">
+          <h2>Contact Detais</h2>
+        </div>
+        <div class="contact-details fl-wrap">
+          <ul>
+            <li>
+              <span>01. Mail :</span>
+              <a href={site.contact.emailHref} target="_blank" rel="noopener noreferrer">
+                {site.contact.email}
+              </a>
+            </li>
+            <li>
+              <span>02. Adress :</span>
+              <a href="#">Gran Canaria, Canary Islands, Spain</a>
+            </li>
+            <li>
+              <span>03. Phone :</span>
+              <a href={site.contact.phoneHref}>{site.contact.phone}</a>
+            </li>
+          </ul>
+        </div>
+        <a href="#" class="btn fl-btn color-bg show_contact-form">
+          <span>Say Hello</span>
+        </a>
+        <div class="aside-show_cf show_contact-form">
+          <i class="fal fa-envelope"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-back">
+      <div class="hidden-contact_form-wrap_inner">
+        <div class="close-contact_form cnt-anim"><i class="fal fa-times"></i></div>
+        <div class="contact-details-title fl-wrap">
+          <h2>Get in Touch</h2>
+        </div>
+        <div id="contact-form" class="fl-wrap">
+          <div id="message"></div>
+          <form class="custom-form" action="/contact.php" name="contactform" id="contactform" method="post">
+            <fieldset>
+              <div class="row">
+                <div class="col-sm-6">
+                  <input type="text" name="name" id="name" placeholder="Your Name *" value="" />
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" name="email" id="email" placeholder="Email Address *" value="" />
+                </div>
+              </div>
+              <textarea
+                name="comments"
+                id="comments"
+                cols="40"
+                rows="3"
+                placeholder="Your Message:"
+                class="cnt-anim"></textarea>
+              <button class="btn fl-btn color-bg" id="submit" type="submit">
+                <span>Send Message</span>
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <div
+      id="map-single"
+      class="map"
+      data-latlog={`[${site.location.lat} , ${site.location.lon}]`}
+      data-popuptext="My Location in Gran Canaria ."
+    >
+    </div>
+  </div>
+
+  <div class="main_social">
+    <span class="main-social-title">Find on:</span>
+    <ul>
+      <li><a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+      <li><a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+      <li><a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+      <li><a href="#" target="_blank" rel="noopener noreferrer" aria-label="VK"><i class="fab fa-vk"></i></a></li>
+    </ul>
+  </div>
+
+  <script>
+    import { initContacts } from '@scripts/contacts';
+    initContacts();
+  </script>
+</BaseLayout>

@@ -1,0 +1,73 @@
+---
+/**
+ * Portfolio (grid horizontal). Migrado desde portfolio.html.
+ *
+ * Diferencia clave con el original: el HTML de los items se genera en tiempo
+ * de build a partir de `src/data/projects.ts` (antes lo hacía en runtime
+ * `js/portfolio-generator.js`). Aún seguimos cargando ese script porque
+ * inicializa Isotope y otros bindings, pero como el DOM ya está poblado, el
+ * generador se limita a lanzar `console.log` (no hay contenedor vacío que
+ * rellenar en la práctica: el <div id="portfolio_horizontal_container">
+ * ya viene con los items server-side).
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ScrollDownNotifier from '@components/ScrollDownNotifier.astro';
+import PortfolioGridItem from '@components/portfolio/PortfolioGridItem.astro';
+import { listedProjects } from '@data/projects';
+
+// Mantenemos el orden original: id DESC (más reciente primero).
+const gridProjects = [...listedProjects].sort((a, b) => b.id - a.id);
+---
+
+<BaseLayout
+  title="Portfolio — Ignacio Galante Milicua"
+  pageSubtitle="Portfolio"
+  fullHeight
+  contentClass="hor-content_padd"
+>
+  <div class="fixed-bottom-panel fs-fix-bom-panel hfw">
+    <div class="gallery-filters-wrap">
+      <div class="gallery-filters init_hidden_filter">
+        <a href="#" class="gallery-filter gallery-filter-active" data-filter="*">All projects</a>
+        <a href="#" class="gallery-filter" data-filter=".web">Web Design</a>
+        <a href="#" class="gallery-filter" data-filter=".design">Design</a>
+        <a href="#" class="gallery-filter" data-filter=".branding">Branding</a>
+        <a href="#" class="gallery-filter" data-filter=".uides">Ui Design</a>
+      </div>
+      <div class="psn_button act-filter"><i class="fal fa-sort"></i> FIlter</div>
+    </div>
+  </div>
+
+  <!-- horizontal-grid -->
+  <div class="horizontal-grid-wrap fl-wrap full-height">
+    <div id="portfolio_horizontal_container" class="two-ver-columns lightgallery">
+      {gridProjects.map((project) => <PortfolioGridItem project={project} />)}
+    </div>
+  </div>
+  <!-- horizontal-grid end -->
+
+  <ScrollDownNotifier />
+
+  <div class="fs-folio-counter hor-scroll-counter">
+    <div class="folio-counter">
+      <div class="num-album"><span></span></div>
+      <div class="all-album"></div>
+    </div>
+  </div>
+
+  <div class="body-color-bg"></div>
+
+  <div class="fs-pg-idicator_wrap hor-scroll-idicator color-bg">
+    <div class="progress-indicator">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 44 44">
+        <circle cx="16" cy="16" r="15.9155" class="progress-bar__background"></circle>
+        <circle cx="16" cy="16" r="15.9155" class="progress-bar__progress js-progress-bar"></circle>
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    import { initPortfolioGrid } from '@scripts/portfolio-grid';
+    initPortfolioGrid();
+  </script>
+</BaseLayout>

@@ -1,0 +1,165 @@
+/* Estilos globales propios del rediseño (Astro).
+ * La paleta de marca vive en color.css (--color-navy-*, --color-accent).
+ */
+
+/* Desktop: el wrap del grid debe poder desplazarse en horizontal.
+ * El CSS legacy lo deja en overflow:hidden y dependía de niceScroll. */
+@media (min-width: 765px) {
+  .horizontal-grid-wrap {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent, #f2842f) transparent;
+    cursor: grab;
+  }
+
+  .horizontal-grid-wrap.is-dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+
+  .horizontal-grid-wrap::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .horizontal-grid-wrap::-webkit-scrollbar-thumb {
+    background: var(--color-accent, #f2842f);
+  }
+}
+
+/* En táctil no hay hover: el overlay tiene que estar visible para poder abrir. */
+@media (hover: none) {
+  .horizontal-grid-wrap .grid-det {
+    left: 0;
+    top: 0;
+  }
+}
+
+.horizontal-grid-wrap .portfolio_item {
+  cursor: pointer;
+}
+
+/* El plugin jQuery `.menu()` añadía estas clases en runtime. Sin ellas
+ * los enlaces heredan color negro y text-align:center del body.
+ * El panel debe medir solo el bloque de ítems, no toda la pantalla. */
+.nav-container {
+  position: relative;
+  z-index: 20;
+  padding: 22px 28px 78px;
+}
+
+.sliding-menu-wrapper {
+  float: left;
+  width: 100%;
+}
+
+.sliding-menu a {
+  height: 34px;
+  line-height: 34px;
+}
+
+.page-subtitle {
+  max-width: min(360px, 42vw);
+}
+
+.page-subtitle span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* About: mismo fondo gris del sitio. El template original pintaba
+ * .column-wrap Y cada `section` de blanco; los títulos iban en negro. */
+.content.about-page,
+.content.about-page .column-wrap,
+.content.about-page .column-wrap-container,
+.content.about-page section,
+.content.about-page .scroll_sec {
+  background: #313131;
+}
+
+/* About es más alto que la ventana: el scroll real ocurre en #wrapper,
+ * no en `html`. Sin esto las animaciones de skills no se disparan. */
+body:has(.about-page) #wrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.column-wrap .col-wc_dec {
+  background: #292929;
+}
+
+.column-wrap .section-title h3,
+.column-wrap .main-about h2,
+.column-wrap .main-about h2 span,
+.column-wrap .srv-link-text h4,
+.column-wrap .custom-skillbar-title span,
+.column-wrap .testimonilas-text h3,
+.column-wrap .percent {
+  color: #fff;
+}
+
+.column-wrap p,
+.column-wrap .section-title p,
+.column-wrap .main-about p,
+.column-wrap .skill-bar-percent,
+.column-wrap .piechart-holder h4,
+.column-wrap .testimonilas-text p,
+.column-wrap .swiper-slide-active .testi-item p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.column-wrap .section-title:after,
+.column-wrap .section-separator:before,
+.column-wrap .testimonilas-carousel-wrap:before {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.column-wrap .section-title h3:before {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.column-wrap .section-number {
+  color: rgba(255, 255, 255, 0.06);
+}
+
+.column-wrap .section-number span:before {
+  background: #313131;
+}
+
+.column-wrap .process-details {
+  background: #292929;
+}
+
+.column-wrap .client-list li a {
+  background: #292929;
+}
+
+.column-wrap .client-list li a:hover {
+  background: #3a3a3a;
+}
+
+.column-wrap .chart {
+  background: #292929;
+}
+
+.column-wrap .skillbar-bg {
+  background: #3a3a3a;
+}
+
+.column-wrap .piechart-holder {
+  overflow: hidden;
+}
+
+.column-wrap .testimonilas-text {
+  background: #292929;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.column-wrap .swiper-slide-active .testimonilas-text,
+.column-wrap .swiper-slide-active .testi-item {
+  background: #3a3a3a;
+}
+

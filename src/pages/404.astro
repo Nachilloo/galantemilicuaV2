@@ -1,0 +1,27 @@
+---
+/**
+ * Página 404. Astro sirve automáticamente `src/pages/404.astro` cuando una
+ * ruta no coincide, tanto en `astro dev` como en la salida estática.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 — Ignacio Galante Milicua"
+  pageSubtitle="404"
+  description="La página que buscas no existe."
+  fullHeight
+>
+  <div class="fs-hero-wrap">
+    <div class="bg" data-bg="/images/bg/1.jpg"></div>
+    <div class="overlay"></div>
+    <div class="error-wrap fl-wrap">
+      <div class="container">
+        <h2>404</h2>
+        <p>We're sorry, but the Page you were looking for, couldn't be found.</p>
+        <a href="/" class="btn ajax color-bg"><span>Back to Home Page</span></a>
+      </div>
+    </div>
+    <div class="body-color-bg"></div>
+  </div>
+</BaseLayout>

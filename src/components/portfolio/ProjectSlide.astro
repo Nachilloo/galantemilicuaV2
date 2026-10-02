@@ -1,0 +1,56 @@
+---
+/**
+ * Slide individual de un portfolio-single. Reproduce el markup del template:
+ *
+ *   <div class="swiper-slide hov_zoom">
+ *     <img ...>
+ *     <a class="box-media-zoom popup-image">...</a>
+ *     <span class="slide-numb">.01</span>
+ *     <div class="show-info">...</div>
+ *   </div>
+ *
+ * La imagen visible se sirve con `<Image />` (astro:assets) cuando el asset
+ * vive en `src/assets/portfolio/`. El zoom apunta al archivo original con
+ * hash (`.src` del import) para que LightGallery abra la versión sin resize.
+ */
+import { Image } from 'astro:assets';
+import type { ProjectSlide } from '@data/projects';
+import { getPortfolioImage } from '@data/portfolio-images';
+
+interface Props {
+  slide: ProjectSlide;
+}
+const { slide } = Astro.props;
+
+const displayImg = getPortfolioImage(slide.image);
+const zoomImg = getPortfolioImage(slide.zoomImage);
+const zoomHref = zoomImg?.src ?? slide.zoomImage;
+---
+
+<div class="swiper-slide hov_zoom">
+  {
+    displayImg ? (
+      <Image
+        src={displayImg}
+        alt={slide.title}
+        widths={[800, 1200, 1600]}
+        sizes="(max-width: 1200px) 100vw, 1600px"
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <img src={slide.image} alt={slide.title} loading="lazy" decoding="async" />
+    )
+  }
+  <a href={zoomHref} class="box-media-zoom popup-image">
+    <i class="fal fa-search"></i>
+  </a>
+  <span class="slide-numb">{slide.slideNumber}</span>
+  <div class="show-info">
+    <span>Info</span>
+    <div class="tooltip-info">
+      <h5>{slide.title}</h5>
+      <p>{slide.description}</p>
+    </div>
+  </div>
+</div>

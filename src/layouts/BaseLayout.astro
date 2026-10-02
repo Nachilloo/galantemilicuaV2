@@ -1,0 +1,154 @@
+---
+/**
+ * Layout base compartido por todas las páginas del sitio.
+ *
+ * Reproduce el esqueleto que en el template original se repetía en cada
+ * archivo .html (loader, main-header, left-header, share-btn, nav-holder,
+ * cursor personalizado y bloque de scripts al final del body). Cada página
+ * inyecta su contenido específico a través del slot por defecto.
+ */
+import { site } from '@data/site';
+import Loader from '@components/Loader.astro';
+import Header from '@components/Header.astro';
+import SocialSidebar from '@components/SocialSidebar.astro';
+import ShareButton from '@components/ShareButton.astro';
+import NavMenu from '@components/NavMenu.astro';
+import Footer from '@components/Footer.astro';
+
+// Estilos legacy migrados a src/styles/ y procesados por Vite (minify + hash
+// + cache-busting). Las URLs internas (../fonts/*, ../img/*) fueron reescritas
+// a rutas absolutas (/fonts/*, /img/*) para que sigan resolviendo contra
+// public/ tras el bundling.
+import '@styles/plugins.css';
+import '@styles/style.css';
+import '@styles/color.css';
+import '@styles/global.css';
+
+interface Props {
+  /** Título de la pestaña. Si se omite, se usa el título general del sitio. */
+  title?: string;
+  /** Meta descripción. */
+  description?: string;
+  /** Keywords opcionales (meta name="keywords"). */
+  keywords?: string;
+  /** Título mostrado a la derecha del header (page-subtitle). */
+  pageSubtitle?: string;
+  /**
+   * Si es true, marca el <div class="content"> con `full-height` (usado por la
+   * home / hero pages). Por defecto false.
+   */
+  fullHeight?: boolean;
+  /**
+   * Clases extra para el <div class="content"> (ej. "no-mob-hidden",
+   * "hor-content_padd"). Se concatenan con `content` y `full-height`.
+   */
+  contentClass?: string;
+  /**
+   * Imagen usada en las cards Open Graph / Twitter (URL absoluta o relativa a /).
+   * Por defecto se usa `/images/logo.png`.
+   */
+  ogImage?: string;
+  /**
+   * `article` para páginas de proyecto, `website` para el resto.
+   */
+  ogType?: 'website' | 'article';
+}
+
+const {
+  title = site.title,
+  description = '',
+  keywords = '',
+  pageSubtitle = '',
+  fullHeight = false,
+  contentClass = '',
+  ogImage = '/images/logo.png',
+  ogType = 'website',
+} = Astro.props;
+
+// URL absoluta de la página actual (útil para OG). `Astro.site` viene de
+// astro.config.mjs (`site: 'https://galantemilicua.com'`).
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const absoluteOgImage = new URL(ogImage, Astro.site).toString();
+---
+
+<!doctype html>
+<html lang={site.defaultLang}>
+  <head>
+    <!--=============== basic ===============-->
+    <meta charset="UTF-8" />
+    <title>{title}</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content={keywords} />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!--=============== open graph ===============-->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.title} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={absoluteOgImage} />
+
+    <!--=============== twitter ===============-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOgImage} />
+
+    <!--
+      NOTA: los <link rel="stylesheet"> con los CSS legacy ya no van aquí:
+      ahora se importan como módulos ES en el frontmatter y Vite se encarga
+      de inyectar los <link> hasheados en el head automáticamente.
+    -->
+
+    <!--=============== favicons ===============-->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  </head>
+
+  <body>
+    <Loader />
+
+    <!-- main start -->
+    <div id="main">
+      <Header />
+      <SocialSidebar />
+      <ShareButton />
+
+      <!-- right header (page subtitle) -->
+      <div class="hc_dec_color">
+        <div class="page-subtitle"><span>{pageSubtitle}</span></div>
+      </div>
+      <!-- right header end -->
+
+      <!-- wrapper -->
+      <div id="wrapper">
+        <NavMenu />
+
+        <!-- content (inyectado por cada página) -->
+        <div
+          class:list={['content', { 'full-height': fullHeight }, contentClass]}
+          data-pagetitle={pageSubtitle}
+        >
+          <slot />
+        </div>
+        <!-- content end -->
+      </div>
+      <!-- wrapper end -->
+
+      <Footer />
+    </div>
+    <!-- main end -->
+
+    <script>
+      import { initGlobal } from '@scripts/global';
+      initGlobal();
+    </script>
+  </body>
+</html>

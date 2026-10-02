@@ -1,0 +1,19 @@
+---
+/**
+ * Círculo SVG de progreso (usado en about y portfolio).
+ * Genera el markup que el JS legacy (`js-progress-bar`) espera para
+ * calcular el trazo animado según el scroll.
+ */
+interface Props {
+  /** viewBox base; el original usa "-1 -1 34 34". Portfolio usa "-1 -1 44 44". */
+  viewBox?: string;
+}
+const { viewBox = '-1 -1 34 34' } = Astro.props;
+---
+
+<div class="progress-indicator">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox={viewBox}>
+    <circle cx="16" cy="16" r="15.9155" class="progress-bar__background"></circle>
+    <circle cx="16" cy="16" r="15.9155" class="progress-bar__progress js-progress-bar"></circle>
+  </svg>
+</div>

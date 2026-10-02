@@ -12,7 +12,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.3.5"
+    "@astrojs/sitemap": "^3.7.4",
+    "@types/imagesloaded": "^4.1.7",
+    "@types/isotope-layout": "^3.0.15",
+    "astro": "^7.3.5",
+    "gsap": "^3.15.0",
+    "imagesloaded": "^5.0.0",
+    "isotope-layout": "^3.0.6",
+    "isotope-packery": "^2.0.1",
+    "leaflet": "^1.9.4",
+    "lightgallery": "^2.9.0",
+    "packery": "^3.0.0",
+    "swiper": "^14.2.0"
   },
   "allowScripts": {
     "esbuild": true

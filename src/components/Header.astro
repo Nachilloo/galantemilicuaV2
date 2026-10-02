@@ -1,0 +1,41 @@
+---
+/**
+ * Cabecera principal del sitio: logo, botón de menú y contactos rápidos.
+ * Mantiene las clases CSS del template original (main-header, nav-button,
+ * header-contacts) para conservar todo el estilado y las animaciones JS.
+ */
+import { site } from '@data/site';
+---
+
+<header class="main-header">
+  <!-- logo -->
+  <a href="/" class="ajax logo-holder">
+    <img src="/images/logo.png" alt={site.shortName} />
+  </a>
+  <!-- logo end -->
+
+  <!-- nav-button-wrap -->
+  <div class="nav-button but-hol">
+    <span class="ncs"></span>
+    <span class="nos"></span>
+    <span class="nbs"></span>
+    <div class="menu-button-text">Menu</div>
+  </div>
+  <!-- nav-button-wrap end -->
+
+  <!-- header-contacts -->
+  <div class="header-contacts">
+    <ul>
+      <li>
+        <span>01. Call </span>
+        <a href={site.contact.phoneHref}>{site.contact.phone}</a>
+      </li>
+      <li>
+        <span>02. Write </span>
+        <a href={site.contact.emailHref}>{site.contact.email}</a>
+      </li>
+    </ul>
+    <a href="/contacts" class="ajax contacts-btn">Get in touch</a>
+  </div>
+  <!-- header-contacts end -->
+</header>

@@ -1,0 +1,24 @@
+---
+/**
+ * Barra lateral izquierda con iconos de redes sociales.
+ * Corresponde al bloque <aside class="left-header"> del template original.
+ */
+import { socialLinks } from '@data/site';
+---
+
+<aside class="left-header">
+  <span class="lh_dec color-bg"></span>
+  <div class="left-header_social">
+    <ul>
+      {
+        socialLinks.map((s) => (
+          <li>
+            <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+              <i class={s.icon}></i>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</aside>

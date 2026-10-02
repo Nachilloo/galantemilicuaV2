@@ -1,0 +1,47 @@
+---
+/**
+ * Menú de navegación overlay (nav-holder) que aparece al pulsar el botón
+ * "Menu" del header. Marca automáticamente el enlace activo comparando
+ * con la ruta actual (Astro.url.pathname).
+ */
+import { navItems, site } from '@data/site';
+
+// Ruta actual normalizada sin trailing slash (excepto la home "/").
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+function isActive(href: string): boolean {
+  const normalized = href.replace(/\/$/, '') || '/';
+  return normalized === currentPath;
+}
+---
+
+<div class="nav-holder">
+  <div class="nav-holder-wrap but-hol">
+    <div class="nav-container fl-wrap">
+      <!-- nav -->
+      <nav class="nav-inner sliding-menu" id="menu">
+        <div class="sliding-menu-wrapper">
+          <ul class="menu-panel-root">
+            {
+              navItems.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class:list={[{ 'act-link': isActive(item.href), ajax: !isActive(item.href) }]}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </nav>
+      <!-- nav end -->
+    </div>
+    <div class="nav-footer"><span>{site.title}</span></div>
+    <div class="nav-holder-wrap_line"></div>
+    <div class="nav-holder-wrap_dec"></div>
+  </div>
+</div>
+<div class="nav-overlay"></div>

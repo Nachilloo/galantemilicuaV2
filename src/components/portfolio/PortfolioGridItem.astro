@@ -1,0 +1,78 @@
+---
+/**
+ * Item individual del grid horizontal del portfolio.
+ *
+ * Reproduce byte a byte el markup que en el sitio original generaba
+ * `js/portfolio-generator.js` en tiempo de ejecución a partir de
+ * `window.projectsData`. Aquí lo hacemos en tiempo de build a partir de
+ * `src/data/projects.ts`, así el HTML es estático y SEO-friendly.
+ *
+ * Optimización de imágenes (Fase 3):
+ *   - Si la imagen del proyecto está en `src/assets/portfolio/`, se sirve
+ *     con `<Image />` de `astro:assets` (WebP + hash + lazy loading).
+ *   - Si no (p.ej. video en public/), cae al `<img>` clásico.
+ *   - El zoom (`.grid-media-zoom`) apunta al archivo original (con hash)
+ *     para que LightGallery muestre la versión sin resize.
+ */
+import { Image } from 'astro:assets';
+import type { Project } from '@data/projects';
+import { getPortfolioImage } from '@data/portfolio-images';
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+
+const isVideo = project.mediaType === 'video';
+const gridImg = getPortfolioImage(project.gridImage);
+
+// La imagen del zoom: si es video, apunta al videoUrl; si no, al archivo
+// original (con hash si vino de src/assets, o a la ruta legacy en su defecto).
+const zoomHref = isVideo && project.videoUrl
+  ? project.videoUrl
+  : (gridImg?.src ?? project.thumbnail);
+const zoomIcon = isVideo && project.videoUrl ? 'far fa-play' : 'far fa-search';
+
+// Ruta interna del proyecto (o "#" si el proyecto no tiene página propia).
+const href = project.legacyHtml === '#' ? '#' : `/portfolio/${project.slug}`;
+
+// Clases del contenedor (`.portfolio_item` + categorías + specialClass opcional).
+const rootClasses = [
+  'portfolio_item',
+  ...project.categories,
+  project.hasSpecialClass && project.specialClass ? project.specialClass : null,
+].filter(Boolean);
+---
+
+<div class:list={rootClasses}>
+  <div class="grid-item-holder hov_zoom">
+    {
+      gridImg ? (
+        <Image
+          src={gridImg}
+          alt={project.title}
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 800px) 100vw, 800px"
+          loading="eager"
+          decoding="async"
+        />
+      ) : (
+        <img src={project.gridImage} alt={project.title} loading="eager" decoding="async" />
+      )
+    }
+    <div class="grid-det">
+      <a href={zoomHref} class="grid-media-zoom image-popup">
+        <i class={zoomIcon}></i>
+      </a>
+      <div class="grid-det_category">
+        {project.categoryLabels.map((label) => <a href="#">{label}</a>)}
+      </div>
+      <div class="grid-det-item">
+        <a href={href} class="ajax grid-det_link">
+          {project.title}<i class="fal fa-long-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+    {project.hasHiddenAnim && <div class="hiddec-anim"></div>}
+  </div>
+</div>

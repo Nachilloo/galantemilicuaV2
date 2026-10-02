@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# WSL / Windows Alternate Data Streams
+*Zone.Identifier
+*:Zone.Identifier

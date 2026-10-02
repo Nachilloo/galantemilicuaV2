@@ -1,17 +1,177 @@
 ---
-
+/**
+ * Home page (migrada 1:1 desde el index.html original).
+ *
+ * Toda la "chrome" (header, menú, loader, cursor, scripts legacy, etc.)
+ * vive en BaseLayout. Aquí solo dejamos el contenido específico de la home:
+ * el hero-slider con Swiper y sus controles.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { site } from '@data/site';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title={`${site.shortName} Personal Site`}
+  description="Portfolio personal de Ignacio Galante Milicua, web developer y diseñador desde las Islas Canarias."
+  pageSubtitle="Bienvenido"
+  fullHeight
+>
+  <div class="fl-wrap full-height hero-conatiner">
+    <div class="hero-wrapper fl-wrap full-height hidden-item">
+      <span class="hc_dec"></span>
+
+      <!-- hero-slider-wrap -->
+      <div class="hero-slider-wrap home-half-slider fl-wrap full-height">
+        <div class="hero-slider fs-gallery-wrap fl-wrap full-height">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <!-- swiper-slide 01 -->
+              <div class="swiper-slide">
+                <div class="half-hero-wrap">
+                  <div class="hhw_header">Welcome to my Website</div>
+                  <h1>
+                    Ignacio Galante Milicua - <br />
+                    <span>Web developer</span> and designer<br />
+                    from Canary Islands, <span>SPAIN</span>
+                  </h1>
+                  <h4>
+                    Welcome to my personal website, where I share my passions and projects. Explore
+                    to discover more about me and what I love to create
+                  </h4>
+                  <div class="clearfix"></div>
+                  <a href="/portfolio" class="btn ajax fl-btn color-bg">
+                    <span>My portfolio</span>
+                  </a>
+                </div>
+              </div>
+              <!-- swiper-slide end -->
+
+              <!-- swiper-slide 02 -->
+              <div class="swiper-slide">
+                <div class="half-hero-wrap">
+                  <div class="hhw_header">Welcome to my Website</div>
+                  <h1>
+                    Design and <br />development <br />
+                    of <span>Corporate website</span>
+                  </h1>
+                  <h4>
+                    Welcome to my personal website, where I showcase my expertise in design and
+                    development. Explore to learn more about my services and projects
+                  </h4>
+                  <div class="clearfix"></div>
+                  <a href="/portfolio" class="btn ajax fl-btn color-bg">
+                    <span>View project</span>
+                  </a>
+                </div>
+              </div>
+              <!-- swiper-slide end -->
+
+              <!-- swiper-slide 03 -->
+              <div class="swiper-slide">
+                <div class="half-hero-wrap">
+                  <div class="hhw_header">Welcome to my Website</div>
+                  <h1>
+                    Original Design <br />Features <br />With High{' '}
+                    <span>Quality Code.</span>
+                  </h1>
+                  <h4>
+                    Welcome to my website, where original design meets quality code. Explore to
+                    discover how I blend creativity with technical excellence in my projects
+                  </h4>
+                  <div class="clearfix"></div>
+                  <a href="/about" class="btn ajax fl-btn color-bg">
+                    <span>About me</span>
+                  </a>
+                </div>
+              </div>
+              <!-- swiper-slide end -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- hero-slider-wrap end -->
+
+      <!-- hero-slider-img -->
+      <div class="hero-slider-img hero-slider-wrap_halftwo hidden-item">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="bg" data-bg="/images/bg/bg01.jpg" data-swiper-parallax="20%"></div>
+              <div class="overlay"></div>
+            </div>
+            <div class="swiper-slide">
+              <div class="bg" data-bg="/images/bg/bg03.jpg" data-swiper-parallax="20%"></div>
+              <div class="overlay"></div>
+            </div>
+            <div class="swiper-slide">
+              <div class="bg" data-bg="/images/bg/bg02.jpg" data-swiper-parallax="20%"></div>
+              <div class="overlay"></div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-corner-dec"></div>
+        <div class="hero-corner-dec2"></div>
+      </div>
+      <!-- hero-slider-img end -->
+
+      <!-- slider-controls -->
+      <div class="slider-progress-bar">
+        <span>
+          <svg class="circ" width="50" height="50">
+            <circle
+              class="circ2"
+              cx="25"
+              cy="25"
+              r="23"
+              stroke="rgba(255,255,255,0.4)"
+              stroke-width="1"
+              fill="none"></circle>
+            <circle class="circ1" cx="25" cy="25" r="23" stroke="#fff" stroke-width="2" fill="none"
+            ></circle>
+          </svg>
+        </span>
+      </div>
+      <div class="clone-counter">
+        <div class="current">01</div>
+      </div>
+      <div class="swiper-counter hs_counter">
+        <div class="current">01</div>
+        <div class="total"></div>
+      </div>
+      <div class="hero-slider_control-wrap">
+        <div class="hsc hsc-prev"><span><i class="fal fa-angle-left"></i></span></div>
+        <div class="hsc hsc-next"><span><i class="fal fa-angle-right"></i></span></div>
+      </div>
+      <!-- slider-controls end -->
+
+      <a href="/about" class="ajax start-btn">
+        <span>Start explore <i class="fal fa-long-arrow-right"></i></span>
+      </a>
+      <div class="play-pause_slider hsc_pp auto_actslider">
+        <i class="fas fa-play"></i>
+      </div>
+    </div>
+    <!-- hero-container end -->
+
+    <div class="hero-decor-numb">
+      <span>{site.location.lat} </span><span>{site.location.lon} </span>
+      <a href={site.location.mapsUrl} target="_blank" rel="noopener noreferrer" class="hero-decor-numb-tooltip">
+        {site.location.label}
+      </a>
+    </div>
+    <div class="hero-slider-wrap_pagination"></div>
+    <div class="hero-scroll-down-notifer">
+      <div class="scroll-down-wrap">
+        <div class="mousey">
+          <div class="scroller"></div>
+        </div>
+      </div>
+      <i class="far fa-angle-down"></i>
+    </div>
+  </div>
+
+  <script>
+    import { initHome } from '@scripts/home';
+    initHome();
+  </script>
+</BaseLayout>

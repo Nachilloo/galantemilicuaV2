@@ -1,0 +1,33 @@
+---
+/**
+ * Wrapper de `<section class="scroll_sec">` con número, título opcional y
+ * separador siguiente. Modela las secciones de la página About.
+ */
+interface Props {
+  /** id del section (usado por page-scroll-nav para el scroll). */
+  id: string;
+  /** Número mostrado en la esquina inferior derecha (ej. "01"). */
+  number?: string;
+  /** Muestra el separador `.section-separator` DESPUÉS del section. */
+  separatorAfter?: boolean;
+}
+const { id, number, separatorAfter = true } = Astro.props;
+---
+
+<section class="scroll_sec" id={id}>
+  <div class="container">
+    <slot />
+  </div>
+  {
+    number ? (
+      <div class="section-number">
+        <span>0</span>
+        {number.replace(/^0/, '')}.
+      </div>
+    ) : (
+      <div class="section-number"><span></span></div>
+    )
+  }
+</section>
+
+{separatorAfter && <div class="section-separator fl-wrap"><span></span></div>}
