@@ -1,43 +1,53 @@
-# Astro Starter Kit: Minimal
+# galantemilicua V2
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Sitio personal de [Ignacio Galante Milicua](https://galantemilicua.com): frontend / full-stack, UX/UI y diseño, desde Gran Canaria.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Esta carpeta es la **migración a Astro** del sitio estático original (`galantemilicua/`: HTML suelto, jQuery, plugins y `scripts.js`). El look y la navegación se mantienen; el HTML, las rutas y el JS se reescribieron.
 
-## 🚀 Project Structure
+## Qué cambió respecto al original
 
-Inside of your Astro project, you'll see the following folders and files:
+- **Astro 7 (SSG)**: páginas en `src/pages/`, layout compartido, build a `dist/`.
+- **Rutas limpias**: `/`, `/about`, `/portfolio`, `/portfolio/[slug]`, `/contacts` (y 404).
+- **Portfolio en datos**: los 18 proyectos viven en `src/data/projects.ts`. El grid y las fichas se generan en build (antes el HTML del grid se montaba en runtime).
+- **JS moderno**: GSAP 3, Swiper, Isotope + Packery, LightGallery 2 y Leaflet. Sin jQuery ni navegación AJAX (`$.coretemp`).
+- **SEO**: `site` en `astro.config.mjs`, sitemap (`@astrojs/sitemap`), Open Graph y `robots.txt`.
+- **Legacy**: 301 Apache en `public/.htaccess` desde `portfolio-single*.html`, `about.html`, etc. El formulario sigue enviando a `public/contact.php` (hosting dinahosting).
+
+## Stack
+
+Astro · TypeScript · GSAP · Swiper · Isotope/Packery · LightGallery · Leaflet
+
+Node `>= 22.12`.
+
+## Estructura
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+  pages/           # rutas (index, about, contacts, portfolio, 404)
+  layouts/         # BaseLayout
+  components/      # header, menú, items de portfolio, etc.
+  data/            # site.ts, projects.ts
+  scripts/         # init por página (global, home, about, portfolio…)
+  styles/          # CSS legacy + color.css + global.css
+public/            # imágenes, fonts, .htaccess, contact.php, robots.txt
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+El sitemap sale en el build, en la raíz de `dist/`:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `dist/sitemap-index.xml`
+- `dist/sitemap-0.xml`
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Comandos
 
-## 🧞 Commands
+```sh
+npm install
+npm run dev       # http://localhost:4321
+npm run build     # → ./dist/
+npm run preview
+```
 
-All commands are run from the root of the project, from a terminal:
+Para el servidor de desarrollo en segundo plano: `astro dev --background`.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Despliegue
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Build estático. Subir el contenido de `dist/` al hosting (Apache). No borrar `.htaccess` ni `contact.php`.
